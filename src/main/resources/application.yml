@@ -1,0 +1,7 @@
+spring.application.name: pet-project-services
+
+spring:
+  r2dbc:
+    url: 'r2dbc:postgresql://localhost:5430/services-db'
+    username: postgres
+    password: postgres
