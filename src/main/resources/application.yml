@@ -5,3 +5,10 @@ spring:
     url: 'r2dbc:postgresql://localhost:5430/services-db'
     username: postgres
     password: postgres
+
+  liquibase:
+    enabled: true
+    url: 'jdbc:postgresql://localhost:5430/services-db'
+    user: postgres
+    password: postgres
+    change-log: 'classpath:db/changelog/changelog-master.xml'

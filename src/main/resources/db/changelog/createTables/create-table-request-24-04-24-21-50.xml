@@ -1,0 +1,31 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-request-24-04-24-21-50" author="Egorov Mikhail">
+        <createTable tableName="request">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="client_id" type="int">
+                <constraints foreignKeyName="fk_request_client_id" references="client(id)" nullable="false"/>
+            </column>
+            <column name="messsage" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="executor_id" type="int">
+                <constraints foreignKeyName="fk_request_executor_id" references="executor(id)" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_creation" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_last_modified" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
