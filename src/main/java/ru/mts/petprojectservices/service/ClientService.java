@@ -20,19 +20,19 @@ public class ClientService {
         this.clientMapper = clientMapper;
     }
 
-    public Flux<Client> getClients() {
+    public Flux<Client> getAll() {
         return clientRepository.findAll();
     }
 
-    public Mono<Client> getClientById(int id) {
+    public Mono<Client> getById(int id) {
         return clientRepository.findById(id);
     }
 
-    public Mono<Void> deleteClientById(int id) {
+    public Mono<Void> deleteById(int id) {
         return clientRepository.deleteById(id);
     }
 
-    public Mono<Client> saveClient(ClientDto clientDto) {
-        return clientRepository.save(clientMapper.clientDtoToClient(clientDto));
+    public Mono<Client> save(Mono<ClientDto> clientDto) {
+        return clientDto.flatMap(x -> clientRepository.save(clientMapper.clientDtoToClient(x)));
     }
 }

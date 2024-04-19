@@ -20,19 +20,19 @@ public class ExecutorService {
         this.executorMapper = executorMapper;
     }
 
-    public Flux<Executor> getExecutors() {
+    public Flux<Executor> getAll() {
         return executorRepository.findAll();
     }
 
-    public Mono<Executor> getExecutorById(int id) {
+    public Mono<Executor> getById(int id) {
         return executorRepository.findById(id);
     }
 
-    public Mono<Void> deleteExecutorById(int id) {
+    public Mono<Void> deleteById(int id) {
         return executorRepository.deleteById(id);
     }
 
-    public Mono<Executor> saveExecutor(ExecutorDto executorDto) {
-        return executorRepository.save(executorMapper.executorDtoToExecutor(executorDto));
+    public Mono<Executor> save(Mono<ExecutorDto> executorDto) {
+        return executorDto.flatMap(x -> executorRepository.save(executorMapper.executorDtoToExecutor(x)));
     }
 }

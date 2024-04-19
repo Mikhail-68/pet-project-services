@@ -1,8 +1,13 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    
-    <include file="createTables/changelog.xml" relativeToChangelogFile="true"/>
-    <include file="alterTables/changelog.xml" relativeToChangelogFile="true"/>
+
+    <changeSet id="alter-table-request-add-column-address-24-04-19-13-00" author="Egorov Mikhail">
+        <addColumn tableName="request">
+            <column name="address" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

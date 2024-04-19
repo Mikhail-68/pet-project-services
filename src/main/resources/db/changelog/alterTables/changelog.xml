@@ -1,0 +1,9 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    
+    <include file="alter-table-request-add-column-address-24-04-19-13-00.xml" relativeToChangelogFile="true"/>
+    <include file="alter-table-request-rename-column-messsage-24-04-19-14-00.xml" relativeToChangelogFile="true"/>
+    <include file="alter-table-request-delete-constraint-executor-id-24-04-19-14-00.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

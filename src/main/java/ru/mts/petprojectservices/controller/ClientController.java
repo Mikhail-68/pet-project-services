@@ -20,22 +20,22 @@ public class ClientController {
     }
 
     @GetMapping("/all")
-    public Flux<Client> getClients() {
-        return clientService.getClients();
+    public Flux<Client> getAll() {
+        return clientService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Mono<Client> getClientById(@PathVariable int id) {
-        return clientService.getClientById(id);
+    public Mono<Client> getById(@PathVariable int id) {
+        return clientService.getById(id);
     }
 
     @DeleteMapping("/{id}")
-    public Mono<Void> deleteClientById(@PathVariable int id) {
-        return clientService.deleteClientById(id);
+    public Mono<Void> deleteById(@PathVariable int id) {
+        return clientService.deleteById(id);
     }
 
     @PostMapping
-    public Mono<Client> saveClient(@RequestBody ClientDto clientDto) {
-        return clientService.saveClient(clientDto);
+    public Mono<Client> save(@RequestBody Mono<ClientDto> clientDto) {
+        return clientService.save(clientDto);
     }
 }
