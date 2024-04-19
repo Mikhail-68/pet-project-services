@@ -2,6 +2,7 @@ package ru.mts.petprojectservices.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.in.RequestInDto;
@@ -13,6 +14,7 @@ import ru.mts.petprojectservices.repository.RequestRepository;
 
 import java.time.LocalDateTime;
 
+@Transactional(readOnly = true)
 @Service
 public class RequestService {
     private final RequestRepository requestRepository;
@@ -52,18 +54,22 @@ public class RequestService {
         }
     }
 
+    @Transactional
     public Mono<Void> deleteById(int id) {
         return requestRepository.deleteById(id);
     }
 
+    @Transactional
     public Mono<Void> deleteByClientId(int clientId) {
         return requestRepository.deleteByClientId(clientId);
     }
 
+    @Transactional
     public Mono<Void> deleteByExecutorId(int executorId) {
         return requestRepository.deleteByClientId(executorId);
     }
 
+    @Transactional
     public Mono<Request> updateExecutor(int requestId, int executorId) {
         return requestRepository.findById(requestId)
                 .flatMap(request -> {
@@ -72,6 +78,7 @@ public class RequestService {
                 });
     }
 
+    @Transactional
     public Mono<Request> updateStatus(int requestId, String statusName) {
         return requestRepository.findById(requestId)
                 .flatMap(request -> {
@@ -83,6 +90,7 @@ public class RequestService {
                 });
     }
 
+    @Transactional
     public Mono<Request> save(Mono<RequestInDto> requestMono) {
         return requestMono.flatMap(x -> {
             LocalDateTime date = LocalDateTime.now();
