@@ -33,6 +33,6 @@ public class ClientService {
     }
 
     public Mono<Client> saveClient(ClientDto clientDto) {
-        return clientRepository.save(clientMapper.clientToClientDto(clientDto));
+        return clientRepository.save(clientMapper.clientDtoToClient(clientDto));
     }
 }

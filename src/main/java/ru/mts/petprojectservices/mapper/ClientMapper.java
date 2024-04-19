@@ -7,5 +7,6 @@ import ru.mts.petprojectservices.entity.Client;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ClientMapper {
-    Client clientToClientDto(ClientDto clientDto);
+    Client clientDtoToClient(ClientDto clientDto);
+    ClientDto clientToClientDto(Client client);
 }

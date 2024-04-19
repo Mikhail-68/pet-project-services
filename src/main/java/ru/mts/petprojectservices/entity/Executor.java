@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Client {
+public class Executor {
     @Id
     @EqualsAndHashCode.Exclude
     private int id;

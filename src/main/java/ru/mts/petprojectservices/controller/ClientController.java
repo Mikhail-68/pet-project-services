@@ -9,7 +9,7 @@ import ru.mts.petprojectservices.entity.Client;
 import ru.mts.petprojectservices.service.ClientService;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/client")
 public class ClientController {
 
     private final ClientService clientService;
@@ -19,22 +19,22 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/clients")
+    @GetMapping("/all")
     public Flux<Client> getClients() {
         return clientService.getClients();
     }
 
-    @GetMapping("/client/{id}")
+    @GetMapping("/{id}")
     public Mono<Client> getClientById(@PathVariable int id) {
         return clientService.getClientById(id);
     }
 
-    @DeleteMapping("/client/{id}")
+    @DeleteMapping("/{id}")
     public Mono<Void> deleteClientById(@PathVariable int id) {
         return clientService.deleteClientById(id);
     }
 
-    @PostMapping("/client")
+    @PostMapping
     public Mono<Client> saveClient(@RequestBody ClientDto clientDto) {
         return clientService.saveClient(clientDto);
     }
