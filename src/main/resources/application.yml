@@ -1,5 +1,12 @@
 spring.application.name: pet-project-services
 
+app:
+  scheduling:
+    check-interval: PT30S
+  time-after-request-to-work:
+    minutes: 5
+    hours: 72
+
 spring:
   r2dbc:
     url: 'r2dbc:postgresql://localhost:5430/services-db'
@@ -7,7 +14,6 @@ spring:
     password: postgres
 
   liquibase:
-    enabled: true
     url: 'jdbc:postgresql://localhost:5430/services-db'
     user: postgres
     password: postgres
