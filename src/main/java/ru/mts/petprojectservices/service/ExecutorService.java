@@ -1,6 +1,9 @@
 package ru.mts.petprojectservices.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -10,15 +13,12 @@ import ru.mts.petprojectservices.mapper.ExecutorMapper;
 import ru.mts.petprojectservices.repository.ExecutorRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ExecutorService {
     private final ExecutorRepository executorRepository;
     private final ExecutorMapper executorMapper;
-
-    @Autowired
-    public ExecutorService(ExecutorRepository executorRepository, ExecutorMapper executorMapper) {
-        this.executorRepository = executorRepository;
-        this.executorMapper = executorMapper;
-    }
+    private final KafkaTemplate<String, String> kafkaTemplateString;
+    private final ObjectMapper objectMapper;
 
     public Flux<Executor> getAll() {
         return executorRepository.findAll();
@@ -29,10 +29,19 @@ public class ExecutorService {
     }
 
     public Mono<Void> deleteById(int id) {
-        return executorRepository.deleteById(id);
+        kafkaTemplateString.send("executor-delete", String.valueOf(id), String.valueOf(id));
+        return Mono.empty();
     }
 
-    public Mono<Executor> save(Mono<ExecutorDto> executorDto) {
-        return executorDto.flatMap(x -> executorRepository.save(executorMapper.executorDtoToExecutor(x)));
+    public Mono<Void> save(Mono<ExecutorDto> executorDto) {
+        return executorDto.map(x -> {
+            try {
+                String str = objectMapper.writeValueAsString(executorMapper.executorDtoToExecutor(x));
+                return kafkaTemplateString.send("executor-save", x.getFio(), str);
+            } catch (JsonProcessingException ignored) {
+            }
+            return null;
+        }).then();
     }
+
 }

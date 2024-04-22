@@ -60,7 +60,7 @@ public class RequestController {
     }
 
     @PostMapping
-    public Mono<Request> save(@RequestBody Mono<RequestInDto> requestInDtoMono) {
+    public Mono<Void> save(@RequestBody Mono<RequestInDto> requestInDtoMono) {
         return requestService.save(requestInDtoMono);
     }
 
