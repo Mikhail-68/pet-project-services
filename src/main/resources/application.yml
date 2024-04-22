@@ -7,6 +7,8 @@ app:
     minutes: 5
     hours: 72
 
+kafka.bootstrapServers: 'localhost:9090'
+
 spring:
   r2dbc:
     url: 'r2dbc:postgresql://localhost:5430/services-db'
