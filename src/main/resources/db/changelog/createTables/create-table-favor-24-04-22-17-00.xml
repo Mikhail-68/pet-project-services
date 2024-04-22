@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-table-favor-24-04-22-17-00" author="Egorov Mikhail">
+        <createTable tableName="favor">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="request_id" type="int">
+                <constraints foreignKeyName="fk_favor_request_id" references="request(id)" nullable="false"/>
+            </column>
+            <column name="executor_id" type="int">
+                <constraints foreignKeyName="fk_favor_executor_id" references="executor(id)"/>
+            </column>
+            <column name="status" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_creation" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_last_modified" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

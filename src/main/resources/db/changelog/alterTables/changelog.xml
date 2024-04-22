@@ -5,5 +5,6 @@
     <include file="alter-table-request-add-column-address-24-04-19-13-00.xml" relativeToChangelogFile="true"/>
     <include file="alter-table-request-rename-column-messsage-24-04-19-14-00.xml" relativeToChangelogFile="true"/>
     <include file="alter-table-request-delete-constraint-executor-id-24-04-19-14-00.xml" relativeToChangelogFile="true"/>
+    <include file="alter-table-request-delete-columns-2024-04-22-17-00.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

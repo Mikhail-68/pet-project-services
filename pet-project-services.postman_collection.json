@@ -35,13 +35,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/client/1",
+							"raw": "{{host}}/{{api}}/client/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"client",
 								"1"
 							]
@@ -56,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fio\": \"Alex\"\r\n}",
+							"raw": "{\r\n    \"fio\": \"TEST Client\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -64,13 +63,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/client",
+							"raw": "{{host}}/{{api}}/client",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"client"
 							]
 						}
@@ -83,13 +81,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/client/1",
+							"raw": "{{host}}/{{api}}/client/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"client",
 								"1"
 							]
@@ -108,13 +105,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/executor/all",
+							"raw": "{{host}}/{{api}}/executor/all",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"executor",
 								"all"
 							]
@@ -128,15 +124,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/executor/1",
+							"raw": "{{host}}/{{api}}/executor/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"executor",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -149,7 +144,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fio\": \"Alex\"\r\n}",
+							"raw": "{\r\n    \"fio\": \"TEST Executor\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,13 +152,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/executor",
+							"raw": "{{host}}/{{api}}/executor",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"executor"
 							]
 						}
@@ -176,15 +170,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/executor/1",
+							"raw": "{{host}}/{{api}}/executor/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"executor",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -201,13 +194,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/all",
+							"raw": "{{host}}/{{api}}/request/all",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request",
 								"all"
 							]
@@ -221,13 +213,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/2",
+							"raw": "{{host}}/{{api}}/request/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request",
 								"2"
 							]
@@ -241,50 +232,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/client/2",
+							"raw": "{{host}}/{{api}}/request/client/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request",
 								"client",
 								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getByExecutorId",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "getByStatus",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/v1/request/status?status=123",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"request",
-								"status"
-							],
-							"query": [
-								{
-									"key": "status",
-									"value": "123"
-								}
 							]
 						}
 					},
@@ -297,7 +253,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"clientId\": 4,\r\n    \"message\": \"Починить кран\",\r\n    \"address\": \"Москва, Печатники, дом 12к3, кв 10\"\r\n}",
+							"raw": "{\r\n    \"clientId\": 2,\r\n    \"message\": \"Починить кран\",\r\n    \"address\": \"Москва, Печатники, дом 12к3, кв 10\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,13 +261,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/v1/request",
+							"raw": "{{host}}/{{api}}/request",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request"
 							]
 						}
@@ -324,15 +279,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/2",
+							"raw": "{{host}}/{{api}}/request/7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request",
-								"2"
+								"7"
 							]
 						}
 					},
@@ -344,16 +298,162 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/client/1",
+							"raw": "{{host}}/{{api}}/request/client/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
+								"{{api}}",
 								"request",
 								"client",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favor",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/favor/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"favor",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/request/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"request",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByClientId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/request/client/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"request",
+								"client",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByExecutorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/favor/executor/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"favor",
+								"executor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/favor/status?status=CREATED",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"favor",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "CREATED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/favor/7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"favor",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteByClientId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{api}}/favor/client/10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{api}}",
+								"favor",
+								"client",
+								"10"
 							]
 						}
 					},
@@ -365,16 +465,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/executor/1",
+							"raw": "{{host}}/{{api}}/favor/executor/6",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
-								"request",
+								"{{api}}",
+								"favor",
 								"executor",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -386,17 +485,16 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/1/executor/2",
+							"raw": "{{host}}/{{api}}/favor/1/executor/4",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
-								"request",
+								"{{api}}",
+								"favor",
 								"1",
 								"executor",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -408,15 +506,14 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/v1/request/3/status?status=IN_PROGRESS",
+							"raw": "{{host}}/{{api}}/favor/6/status?status=IN_PROGRESS",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"api",
-								"v1",
-								"request",
-								"3",
+								"{{api}}",
+								"favor",
+								"6",
 								"status"
 							],
 							"query": [
@@ -424,6 +521,41 @@
 									"key": "status",
 									"value": "IN_PROGRESS"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "kafkaMsg",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fio\": \"Egorov Mikhail\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/test/send",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"test",
+								"send"
 							]
 						}
 					},

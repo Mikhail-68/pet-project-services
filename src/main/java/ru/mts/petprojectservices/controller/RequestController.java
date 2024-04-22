@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.in.RequestInDto;
 import ru.mts.petprojectservices.dto.out.RequestOutDto;
-import ru.mts.petprojectservices.entity.Request;
 import ru.mts.petprojectservices.service.RequestService;
 
 @RestController
@@ -25,23 +24,13 @@ public class RequestController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Request> getById(@PathVariable int id) {
+    public Mono<RequestOutDto> getById(@PathVariable int id) {
         return requestService.getById(id);
     }
 
     @GetMapping("/client/{id}")
-    public Flux<Request> getByClientId(@PathVariable("id") int clientId) {
+    public Flux<RequestOutDto> getByClientId(@PathVariable("id") int clientId) {
         return requestService.getByClientId(clientId);
-    }
-
-    @GetMapping("/executor/{id}")
-    public Flux<Request> getByExecutorId(@PathVariable("id") int executorId) {
-        return requestService.getByExecutorId(executorId);
-    }
-
-    @GetMapping("/status")
-    public Flux<Request> getByStatus(@RequestParam String status) {
-        return requestService.getByStatus(status);
     }
 
     @DeleteMapping("/{id}")
@@ -54,24 +43,9 @@ public class RequestController {
         return requestService.deleteByClientId(clientId);
     }
 
-    @DeleteMapping("/executor/{id}")
-    public Mono<Void> deleteByExecutorId(@PathVariable("id") int executorId) {
-        return requestService.deleteByExecutorId(executorId);
-    }
-
     @PostMapping
     public Mono<Void> save(@RequestBody Mono<RequestInDto> requestInDtoMono) {
         return requestService.save(requestInDtoMono);
-    }
-
-    @PutMapping("/{requestId}/executor/{executorId}")
-    public Mono<Request> updateExecutor(@PathVariable int requestId, @PathVariable int executorId) {
-        return requestService.updateExecutor(requestId, executorId);
-    }
-
-    @PutMapping("/{requestId}/status")
-    public Mono<Request> updateStatus(@PathVariable int requestId, @RequestParam String status) {
-        return requestService.updateStatus(requestId, status);
     }
 
 }

@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.mts.petprojectservices.entity.Client;
+import ru.mts.petprojectservices.entity.Executor;
+import ru.mts.petprojectservices.entity.Favor;
 
 import java.time.LocalDateTime;
 
@@ -14,14 +15,20 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestOutDto {
+public class FavorOutDto {
     private Integer id;
-    private Client client;
-    private String message;
-    private String address;
+    private RequestOutDto request;
+    private Executor executor;
+    private Favor.TypeStatus status;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime dateCreation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    private LocalDateTime dateLastModified;
 
     @JsonIgnore
-    private Integer clientId;
+    private int clientId;
+    @JsonIgnore
+    private int executorId;
+    @JsonIgnore
+    private int requestId;
 }

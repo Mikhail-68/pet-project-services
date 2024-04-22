@@ -35,7 +35,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public Mono<Void> save(@RequestBody Mono<ClientDto> clientDto) {
+    public Mono<Client> save(@RequestBody Mono<ClientDto> clientDto) {
         return clientService.save(clientDto);
     }
 

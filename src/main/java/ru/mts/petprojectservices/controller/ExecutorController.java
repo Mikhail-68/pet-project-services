@@ -33,7 +33,7 @@ public class ExecutorController {
     }
 
     @PostMapping
-    public Mono<Void> save(@RequestBody Mono<ExecutorDto> executorDto) {
+    public Mono<Executor> save(@RequestBody Mono<ExecutorDto> executorDto) {
         return executorService.save(executorDto);
     }
 }

@@ -9,6 +9,7 @@ app:
 
 kafka.bootstrapServers: 'localhost:9090'
 
+server.port: 8088
 spring:
   r2dbc:
     url: 'r2dbc:postgresql://localhost:5430/services-db'
