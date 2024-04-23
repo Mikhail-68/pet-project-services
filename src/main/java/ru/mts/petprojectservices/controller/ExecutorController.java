@@ -1,5 +1,6 @@
 package ru.mts.petprojectservices.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -9,13 +10,10 @@ import ru.mts.petprojectservices.service.ExecutorService;
 
 @RestController
 @RequestMapping("/api/v1/executor")
+@RequiredArgsConstructor
 public class ExecutorController {
 
     private final ExecutorService executorService;
-
-    public ExecutorController(ExecutorService executorService) {
-        this.executorService = executorService;
-    }
 
     @GetMapping("/all")
     public Flux<Executor> getAll() {
@@ -36,4 +34,5 @@ public class ExecutorController {
     public Mono<Executor> save(@RequestBody Mono<ExecutorDto> executorDto) {
         return executorService.save(executorDto);
     }
+
 }

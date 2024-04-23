@@ -1,6 +1,6 @@
 package ru.mts.petprojectservices.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -10,13 +10,10 @@ import ru.mts.petprojectservices.service.RequestService;
 
 @RestController
 @RequestMapping("/api/v1/request")
+@RequiredArgsConstructor
 public class RequestController {
-    private final RequestService requestService;
 
-    @Autowired
-    public RequestController(RequestService requestService) {
-        this.requestService = requestService;
-    }
+    private final RequestService requestService;
 
     @GetMapping("/all")
     public Flux<RequestOutDto> getAll() {

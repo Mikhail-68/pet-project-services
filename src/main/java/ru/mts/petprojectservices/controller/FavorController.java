@@ -1,6 +1,6 @@
 package ru.mts.petprojectservices.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -9,14 +9,10 @@ import ru.mts.petprojectservices.service.FavorService;
 
 @RestController
 @RequestMapping("/api/v1/favor")
+@RequiredArgsConstructor
 public class FavorController {
 
     private final FavorService favorService;
-
-    @Autowired
-    public FavorController(FavorService favorService) {
-        this.favorService = favorService;
-    }
 
     @GetMapping("/all")
     public Flux<FavorOutDto> getAll() {

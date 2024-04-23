@@ -19,7 +19,7 @@ public class FavorKafkaConsumer {
     void listenerSaveFavor(String msg) {
         try {
             Request request = objectMapper.readValue(msg, Request.class);
-            favorService.save(request);
+            favorService.save(request).subscribe();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
