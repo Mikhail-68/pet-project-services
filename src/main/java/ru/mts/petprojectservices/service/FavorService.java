@@ -3,6 +3,7 @@ package ru.mts.petprojectservices.service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.out.FavorOutDto;
+import ru.mts.petprojectservices.entity.Favor;
 import ru.mts.petprojectservices.entity.Request;
 
 
@@ -28,6 +29,6 @@ public interface FavorService {
 
     Mono<FavorOutDto> updateStatus(int favorId, String statusName);
 
-    Mono<Void> save(Request request);
+    Mono<Favor> save(Request request);
 
 }

@@ -1,5 +1,6 @@
 package ru.mts.petprojectservices.scheduler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.r2dbc.core.DatabaseClient;
@@ -12,6 +13,7 @@ import ru.mts.petprojectservices.repository.FavorRepository;
 import java.time.LocalDateTime;
 
 @Service
+@Slf4j
 public class FavorScheduler {
 
     @Value("${app.time-after-request-to-work.minutes:5}")
@@ -31,6 +33,7 @@ public class FavorScheduler {
     @Async
     @Scheduled(fixedRateString = "${app.scheduling.check-interval}")
     public void automaticallyRequestToWork() {
+        log.info("Scheduled requestToWork run");
         favorRepository.findAll()
                 .filter(favor -> (favor.getExecutorId() == null && favor.getDateCreation().isAfter(
                         LocalDateTime.now().minusHours(hours).minusMinutes(minutes)
