@@ -2,10 +2,11 @@ spring.application.name: pet-project-services
 
 app:
   scheduling:
+    enabled: false
     check-interval: PT30S
   time-after-request-to-work:
     minutes: 5
-    hours: 72
+    hours: 0
 
 kafka.bootstrapServers: 'localhost:9090'
 

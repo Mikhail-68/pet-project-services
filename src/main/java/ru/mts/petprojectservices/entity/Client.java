@@ -9,9 +9,9 @@ import org.springframework.data.annotation.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = "id")
 public class Client {
     @Id
-    @EqualsAndHashCode.Exclude
     private int id;
     private String fio;
 }

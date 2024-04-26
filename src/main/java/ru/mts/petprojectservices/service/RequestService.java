@@ -4,6 +4,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.in.RequestInDto;
 import ru.mts.petprojectservices.dto.out.RequestOutDto;
+import ru.mts.petprojectservices.entity.Request;
 
 
 public interface RequestService {
@@ -18,6 +19,6 @@ public interface RequestService {
 
     Mono<Void> deleteByClientId(int clientId);
 
-    Mono<Void> save(Mono<RequestInDto> requestMono);
+    Mono<Request> save(Mono<RequestInDto> requestMono);
 
 }

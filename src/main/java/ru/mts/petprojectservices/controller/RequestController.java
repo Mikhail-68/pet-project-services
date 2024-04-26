@@ -6,6 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.in.RequestInDto;
 import ru.mts.petprojectservices.dto.out.RequestOutDto;
+import ru.mts.petprojectservices.entity.Request;
 import ru.mts.petprojectservices.service.RequestService;
 
 @RestController
@@ -41,7 +42,7 @@ public class RequestController {
     }
 
     @PostMapping
-    public Mono<Void> save(@RequestBody Mono<RequestInDto> requestInDtoMono) {
+    public Mono<Request> save(@RequestBody Mono<RequestInDto> requestInDtoMono) {
         return requestService.save(requestInDtoMono);
     }
 
