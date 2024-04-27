@@ -1,8 +1,9 @@
 spring.application.name: pet-project-services
+server.port: 8088
 
 app:
   scheduling:
-    enabled: false
+    enabled: true
     check-interval: PT30S
   time-after-request-to-work:
     minutes: 5
@@ -10,7 +11,6 @@ app:
 
 kafka.bootstrapServers: 'localhost:9090'
 
-server.port: 8088
 spring:
   r2dbc:
     url: 'r2dbc:postgresql://localhost:5430/services-db'
@@ -22,3 +22,14 @@ spring:
     user: postgres
     password: postgres
     change-log: 'classpath:db/changelog/changelog-master.xml'
+
+# Metrics
+management:
+  endpoints.web.exposure.include: prometheus,health,info,metrics
+  metrics:
+    tags.application: ${spring.application.name}
+    export:
+      prometheus.enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true

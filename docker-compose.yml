@@ -13,7 +13,6 @@ services:
       - './data:/var/lib/postgresql/data'
     ports:
       - '${POSTGRES_LOCAL_PORT}:5432'
-    restart: unless-stopped
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.2.1
@@ -46,3 +45,28 @@ services:
       - '${KAFKA_LOCAL_PORT}:9090' # kafka outside
 #      - '9092:9092' # kafka in containers
       - '${KAFKA_JMX_LOCAL_PORT}:9091' # JMX localhost
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    user: root
+    ports:
+      - '${PROMETHEUS_LOCAL_PORT}:9090'
+    volumes:
+      - './prometheus.yml:/etc/prometheus/prometheus.yml'
+      - './prometheus:/etc/prometheus'
+    networks:
+      - default
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - '${GRAFANA_LOCAL_PORT}:3000'
+    volumes:
+      - './grafana:/var/lib/grafana'
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin

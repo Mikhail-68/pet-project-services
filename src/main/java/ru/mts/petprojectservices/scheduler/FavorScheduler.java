@@ -1,5 +1,8 @@
 package ru.mts.petprojectservices.scheduler;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,18 +23,20 @@ public class FavorScheduler {
     private int minutes;
     @Value("${app.time-after-request-to-work.hours:0}")
     private int hours;
+    private Counter counter;
 
     private final FavorRepository favorRepository;
     private final DatabaseClient databaseClient;
 
     @Autowired
-    public FavorScheduler(FavorRepository favorRepository, DatabaseClient databaseClient) {
+    public FavorScheduler(FavorRepository favorRepository, DatabaseClient databaseClient, PrometheusMeterRegistry meterRegistry) {
         this.favorRepository = favorRepository;
         this.databaseClient = databaseClient;
     }
 
     @Async
     @Scheduled(fixedRateString = "${app.scheduling.check-interval}")
+    @Counted(value = "scheduled", extraTags = {"method", "automaticallyRequestToWork"})
     public void automaticallyRequestToWork() {
         log.info("Scheduled requestToWork run");
         favorRepository.findAll()
@@ -54,6 +59,6 @@ public class FavorScheduler {
                                 return favor;
                             })
                             .flatMap(x -> favorRepository.save(favor));
-                }).subscribe();
+                }).subscribe(favor -> log.info("Scheduled task completed"));
     }
 }
