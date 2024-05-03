@@ -1,21 +1,20 @@
 package ru.mts.petprojectservices.scheduler;
 
 import io.micrometer.core.annotation.Counted;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.mts.petprojectservices.entity.Favor;
 import ru.mts.petprojectservices.repository.FavorRepository;
+import ru.mts.petprojectservices.service.ClientService;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 @Slf4j
 public class FavorScheduler {
 
@@ -23,16 +22,9 @@ public class FavorScheduler {
     private int minutes;
     @Value("${app.time-after-request-to-work.hours:0}")
     private int hours;
-    private Counter counter;
 
     private final FavorRepository favorRepository;
-    private final DatabaseClient databaseClient;
-
-    @Autowired
-    public FavorScheduler(FavorRepository favorRepository, DatabaseClient databaseClient, PrometheusMeterRegistry meterRegistry) {
-        this.favorRepository = favorRepository;
-        this.databaseClient = databaseClient;
-    }
+    private final ClientService clientService;
 
     @Async
     @Scheduled(fixedRateString = "${app.scheduling.check-interval}")
@@ -48,12 +40,7 @@ public class FavorScheduler {
                     favor.setDateCreation(localDateTime);
                     favor.setDateLastModified(localDateTime);
                     favor.setStatus(Favor.TypeStatus.IN_PROGRESS);
-                    return databaseClient.sql("select e.id as exec_id " +
-                                    "from favor f right join executor e on f.executor_id = e.id " +
-                                    "group by e.id " +
-                                    "order by count(f.id) asc " +
-                                    "limit 1 ")
-                            .map((x, y) -> x.get("exec_id", Integer.class)).first()
+                    return clientService.getClientIdWhoHasMinimumOrders()
                             .map(executorId -> {
                                 favor.setExecutorId(executorId);
                                 return favor;

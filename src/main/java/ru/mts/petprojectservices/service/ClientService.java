@@ -15,4 +15,6 @@ public interface ClientService {
 
     Mono<Client> save(Mono<ClientDto> clientDto);
 
+    Mono<Integer> getClientIdWhoHasMinimumOrders();
+
 }

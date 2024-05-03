@@ -37,7 +37,7 @@ public class FavorMapperTest {
     @Nested
     class FavorToFavorDtoFlux {
         @Test
-        public void favorToFavorDtoFlux_returnFavorOutDto() {
+        void favorToFavorDtoFlux_returnFavorOutDto() {
             LocalDateTime dateCreation = LocalDateTime.now();
             LocalDateTime dateLastModified = LocalDateTime.now();
             Client client = new Client(1, "fio client");
@@ -87,7 +87,7 @@ public class FavorMapperTest {
         }
 
         @Test
-        public void favorToFavorDtoFlux_whenDoesNotExistClientInFavor_throwException() {
+        void favorToFavorDtoFlux_whenDoesNotExistClientInFavor_throwException() {
             int requestId = 1;
             when(requestService.getById(requestId)).thenReturn(Mono.empty());
 
@@ -97,7 +97,7 @@ public class FavorMapperTest {
         }
 
         @Test
-        public void favorToFavorDtoFlux_whenDoesNotExistExecutorInFavor_returnFavorOutDtoWithExecutorIsNull() {
+        void favorToFavorDtoFlux_whenDoesNotExistExecutorInFavor_returnFavorOutDtoWithExecutorIsNull() {
             LocalDateTime dateCreation = LocalDateTime.now();
             LocalDateTime dateLastModified = LocalDateTime.now();
             RequestOutDto requestOutDto = RequestOutDto.builder()
@@ -140,6 +140,5 @@ public class FavorMapperTest {
                     .assertNext(actualFavorOutDto -> Assertions.assertEquals(favorOutDto, actualFavorOutDto))
                     .verifyComplete();
         }
-
     }
 }

@@ -15,9 +15,7 @@ import ru.mts.petprojectservices.service.RequestService;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class FavorMapper {
 
-    @Autowired
     protected RequestService requestService;
-    @Autowired
     protected ExecutorService executorService;
 
     public abstract FavorOutDto favorToFavorOutDto(Favor favor);
@@ -39,5 +37,15 @@ public abstract class FavorMapper {
                             return favorOutDto;
                         })
                 );
+    }
+
+    @Autowired
+    public void setRequestService(RequestService requestService) {
+        this.requestService = requestService;
+    }
+
+    @Autowired
+    public void setExecutorService(ExecutorService executorService) {
+        this.executorService = executorService;
     }
 }

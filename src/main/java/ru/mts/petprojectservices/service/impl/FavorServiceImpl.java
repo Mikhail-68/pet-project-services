@@ -1,12 +1,14 @@
 package ru.mts.petprojectservices.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mts.petprojectservices.dto.out.FavorOutDto;
 import ru.mts.petprojectservices.entity.Favor;
 import ru.mts.petprojectservices.entity.Request;
+import ru.mts.petprojectservices.exception.IncorrectStatusNameException;
 import ru.mts.petprojectservices.mapper.FavorMapper;
 import ru.mts.petprojectservices.repository.FavorRepository;
 import ru.mts.petprojectservices.service.FavorService;
@@ -17,6 +19,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FavorServiceImpl implements FavorService {
     private final FavorRepository favorRepository;
     private final FavorMapper favorMapper;
@@ -50,7 +53,8 @@ public class FavorServiceImpl implements FavorService {
         try {
             return favorMapper.favorToFavorOutDto(favorRepository.findByStatus(Favor.TypeStatus.valueOf(statusName.toUpperCase())));
         } catch (IllegalArgumentException e) {
-            return Flux.empty();
+            log.error("Некорректное название статуса");
+            throw new IncorrectStatusNameException();
         }
     }
 
@@ -63,8 +67,7 @@ public class FavorServiceImpl implements FavorService {
     public Mono<Void> deleteByClientId(int clientId) {
         return favorRepository.findAll()
                 .flatMap(favor -> requestService.getByClientId(clientId)
-                        .any(requestOutDto -> Objects.equals(requestOutDto.getId(), favor.getRequestId()))
-                        .filter(aBoolean -> aBoolean)
+                        .filter(requestOutDto -> Objects.equals(requestOutDto.getId(), favor.getRequestId()))
                         .flatMap(aBoolean -> favorRepository.deleteById(favor.getId()))
                 ).singleOrEmpty();
     }

@@ -30,7 +30,7 @@ public class RequestMapperTest {
     @Nested
     class FavorToFavorDtoFlux {
         @Test
-        public void requestToRequestOutDtoFlux_returnRequestOutDtoFlux() {
+        void requestToRequestOutDtoFlux_returnRequestOutDtoFlux() {
             int requestId = 1, clientId = 5;
             Client client = new Client(clientId, "Fio client");
             RequestOutDto requestOutDto = RequestOutDto.builder().clientId(clientId).client(client).build();
@@ -46,7 +46,7 @@ public class RequestMapperTest {
         }
 
         @Test
-        public void requestToRequestOutDtoFlux_whenDoesNotExistClientInRequest_throwException() {
+        void requestToRequestOutDtoFlux_whenDoesNotExistClientInRequest_throwException() {
             when(clientService.getById(Mockito.anyInt())).thenReturn(Mono.empty());
 
             Request request = Request.builder().id(1).clientId(2).build();

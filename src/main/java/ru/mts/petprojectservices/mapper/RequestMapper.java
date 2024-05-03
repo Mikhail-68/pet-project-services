@@ -13,7 +13,6 @@ import ru.mts.petprojectservices.service.ClientService;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class RequestMapper {
 
-    @Autowired
     protected ClientService clientService;
 
     public abstract RequestOutDto requestToRequestOutDto(Request request);
@@ -27,5 +26,10 @@ public abstract class RequestMapper {
                             return requestOutDto;
                         })
                 );
+    }
+
+    @Autowired
+    public void setClientService(ClientService clientService) {
+        this.clientService = clientService;
     }
 }

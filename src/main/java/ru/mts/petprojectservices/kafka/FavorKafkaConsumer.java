@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import ru.mts.petprojectservices.entity.Request;
+import ru.mts.petprojectservices.exception.ObjectProcessingException;
 import ru.mts.petprojectservices.service.FavorService;
 
 @Service
@@ -19,15 +20,15 @@ public class FavorKafkaConsumer {
     private final ObjectMapper objectMapper;
 
     @Counted(value = "kafka.consumer", extraTags = {"method", "listenerSaveFavor"})
-    @KafkaListener(topics = "favor-save", groupId = "group1", containerFactory = "kafkaListenerContainerFactoryString")
+    @KafkaListener(topics = "favor-save", groupId = "group1")
     void listenerSaveFavor(String msg) {
         log.info("Kafka consumer start. Topic: favor-save");
         try {
             Request request = objectMapper.readValue(msg, Request.class);
             favorService.save(request).subscribe();
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Ошибка десериализации объекта");
+            throw new ObjectProcessingException(e);
         }
     }
-
 }

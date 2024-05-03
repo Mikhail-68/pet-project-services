@@ -35,7 +35,7 @@ public class FavorServiceImplTest {
     @Nested
     class GetByClientId {
         @Test
-        public void getByClientId_whenRequestWithClientIdDoesNotExist_returnEmpty() {
+        void getByClientId_whenRequestWithClientIdDoesNotExist_returnEmpty() {
             int clientId = 5;
             int requestId = 3;
 
@@ -50,7 +50,7 @@ public class FavorServiceImplTest {
     @Nested
     class DeleteByClientId {
         @Test
-        public void deleteByClientId_whenRequestExist_deleteClient() {
+        void deleteByClientId_whenRequestExist_deleteClient() {
             int clientId = 3;
             int requestId = 10;
             Favor favor = Favor.builder().id(1).requestId(requestId).build();
@@ -66,7 +66,7 @@ public class FavorServiceImplTest {
         }
 
         @Test
-        public void deleteByClientId_whenRequestDoesNotExist_notDeleteClient() {
+        void deleteByClientId_whenRequestDoesNotExist_notDeleteClient() {
             int clientId = 3;
             int requestId = 10;
             int doesNotRequestId = 999;

@@ -39,7 +39,7 @@ public class RequestServiceImplTest {
     @Nested
     class Save {
         @Test
-        public void save_whenDoesNotExistClient_throwClientDoesNotException() {
+        void save_whenDoesNotExistClient_throwClientDoesNotException() {
             RequestInDto requestInDto = new RequestInDto(1, "msg", "address");
             when(clientService.getById(1)).thenReturn(Mono.empty());
             StepVerifier.create(requestService.save(Mono.just(requestInDto)))
@@ -47,7 +47,7 @@ public class RequestServiceImplTest {
         }
 
         @Test
-        public void save_whenExistClient_returnRequest() throws JsonProcessingException {
+        void save_whenExistClient_returnRequest() throws JsonProcessingException {
             RequestInDto requestInDto = new RequestInDto(1, "msg", "address");
             Client client = new Client(1, "Fio");
             Request savedRequest = Request.builder().id(1).build();

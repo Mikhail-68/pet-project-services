@@ -23,6 +23,14 @@ spring:
     password: postgres
     change-log: 'classpath:db/changelog/changelog-master.xml'
 
+  kafka:
+    bootstrap-servers: localhost:9090
+    consumer:
+      group-id: myGroup
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 # Metrics
 management:
   endpoints.web.exposure.include: prometheus,health,info,metrics

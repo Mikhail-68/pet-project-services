@@ -3,6 +3,7 @@ package ru.mts.petprojectservices.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -11,6 +12,7 @@ import ru.mts.petprojectservices.dto.in.RequestInDto;
 import ru.mts.petprojectservices.dto.out.RequestOutDto;
 import ru.mts.petprojectservices.entity.Request;
 import ru.mts.petprojectservices.exception.ClientDoesNotExistException;
+import ru.mts.petprojectservices.exception.ObjectProcessingException;
 import ru.mts.petprojectservices.mapper.RequestMapper;
 import ru.mts.petprojectservices.repository.RequestRepository;
 import ru.mts.petprojectservices.service.ClientService;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RequestServiceImpl implements RequestService {
     private final RequestRepository requestRepository;
     private final RequestMapper requestMapper;
@@ -69,7 +72,8 @@ public class RequestServiceImpl implements RequestService {
                                     String str = objectMapper.writeValueAsString(savedRequest);
                                     kafkaTemplateString.send("favor-save", String.valueOf(savedRequest.getId()), str);
                                 } catch (JsonProcessingException e) {
-                                    throw new RuntimeException(e);
+                                    log.error("Ошибка сериализации объекта");
+                                    throw new ObjectProcessingException(e);
                                 }
                                 return savedRequest;
                             });
