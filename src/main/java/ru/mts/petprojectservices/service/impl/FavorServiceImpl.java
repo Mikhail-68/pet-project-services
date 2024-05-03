@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.mts.petprojectservices.annotation.Loggable;
 import ru.mts.petprojectservices.dto.out.FavorOutDto;
 import ru.mts.petprojectservices.entity.Favor;
 import ru.mts.petprojectservices.entity.Request;
@@ -78,6 +79,7 @@ public class FavorServiceImpl implements FavorService {
     }
 
     @Override
+    @Loggable
     public Mono<FavorOutDto> updateExecutor(int favorId, int executorId) {
         return favorMapper.favorToFavorOutDto(
                 favorRepository.findById(favorId).flux()
@@ -89,6 +91,7 @@ public class FavorServiceImpl implements FavorService {
     }
 
     @Override
+    @Loggable
     public Mono<FavorOutDto> updateStatus(int favorId, String statusName) {
         return favorMapper.favorToFavorOutDto(favorRepository.findById(favorId).flux()
                 .flatMap(favorOutDto -> {
